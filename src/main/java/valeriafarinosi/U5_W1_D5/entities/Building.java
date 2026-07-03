@@ -29,7 +29,7 @@ public class Building {
     @Column(name = "city", nullable = false)
     private String city;
 
-    public Building(String address, String name, String city) {
+    public Building(String name, String address, String city) {
         setAddress(address);
         setBuildingName(name);
         setCity(city);

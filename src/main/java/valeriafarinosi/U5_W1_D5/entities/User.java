@@ -31,7 +31,7 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    public User(String email, String name, String surname, String username) {
+    public User(String username, String name, String surname, String email) {
         setEmail(email);
         setName(name);
         setSurname(surname);
