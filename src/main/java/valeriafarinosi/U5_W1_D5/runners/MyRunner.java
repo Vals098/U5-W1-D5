@@ -105,13 +105,22 @@ public class MyRunner implements CommandLineRunner {
         Booking bookingF1 = new Booking(LocalDate.of(2026, 8, 21), frodo, garden);
 //        test with same date and same ws of an already existing booking.
         Booking TestSameDateSameWS = new Booking(LocalDate.of(2026, 8, 21), frodo, garden);
+        Booking bookingF2 = new Booking(LocalDate.of(2026, 7, 4), frodo, fireplace);
+        Booking bookingF3 = new Booking(LocalDate.of(2026, 12, 31), frodo, gondorWorkers);
+        Booking bookingG1 = new Booking(LocalDate.of(2147, 3, 3), gandalf, council);
+        Booking bookingG2 = new Booking(LocalDate.of(2430, 5, 23), gandalf, tower);
+        Booking bookingGi1 = new Booking(LocalDate.of(2026, 8, 3), gimli, miningOpRoom);
 
 
 //        SAVE BOOKINGS
 //        bookingService.save(TestDateBeforeToday); //throws DateNotValidException //VERIFIED
 //        bookingService.save(bookingF1); //SAVED
 //        bookingService.save(TestSameDateSameWS); // throws TakenValueException "The workstation GRDN you requested is already booked for the date 2026-08-21" //VERIFIED
-
+//        bookingService.save(bookingF2); //SAVED
+//        bookingService.save(bookingF3); //SAVED
+//        bookingService.save(bookingG1); //SAVED
+//        bookingService.save(bookingG2); //SAVED
+//        bookingService.save(bookingGi1); //SAVED
 
     }
 }
