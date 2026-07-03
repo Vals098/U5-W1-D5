@@ -4,10 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import valeriafarinosi.U5_W1_D5.entities.Booking;
 import valeriafarinosi.U5_W1_D5.entities.Building;
 import valeriafarinosi.U5_W1_D5.entities.User;
 import valeriafarinosi.U5_W1_D5.entities.Workstation;
 import valeriafarinosi.U5_W1_D5.services.BookingService;
+
+import java.time.LocalDate;
 
 @Component
 @Slf4j
@@ -67,6 +70,10 @@ public class MyRunner implements CommandLineRunner {
 //        bookingService.save(gardengeneeringWorkspaceen);
 //        bookingService.save(miningOpRoom);
 
+        
+        Booking booking1 = new Booking(LocalDate.of(2026, 8, 21), frodo, garden);
+
+        bookingService.save(booking1);
 
     }
 }

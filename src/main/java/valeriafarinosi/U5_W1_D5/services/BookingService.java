@@ -43,10 +43,16 @@ public class BookingService {
 
         log.info("The user " + newUser.getName() + " has been saved!");
     }
+    
 
     //    BUILDINGS METHODS
 //    SAVE
     public void save(Building newBuilding) {
+// name is unique
+        if (this.buildingRepository.existsByName(newBuilding.getName()))
+            throw new TakenValueException("The building name " + newBuilding.getName() + " is already taken!");
+
+
         buildingRepository.save(newBuilding);
 
         log.info("The building " + newBuilding.getName() + " has been saved!");
@@ -67,10 +73,16 @@ public class BookingService {
     //    BOOKINGS METHODS
 //    SAVE
     public void save(Booking newBooking) {
-//
-
+//no other bookings with the same workspace and date
+        if (this.bookingRepository.existsByBookingDateAndWorkstation(newBooking.getBookingDate(), newBooking.getWorkstation()))
+            throw new TakenValueException("The workstation " + newBooking.getWorkstation().getWSCode() + " you requested is already booked for the date " + newBooking.getBookingDate());
+//a signle user can't book more than once on the same date. Verified
+        if (this.bookingRepository.existsByBookingDateAndUser(newBooking.getBookingDate(), newBooking.getUser()))
+            throw new TakenValueException("Dear user " + newBooking.getUser().getName() + " you already have a booking under your name for the day " + newBooking.getBookingDate());
 
         bookingRepository.save(newBooking);
+
+        log.info("Thank you " + newBooking.getUser().getName() + "! The booking for the workspace " + newBooking.getWorkstation().getWSCode() + " for the day " + newBooking.getBookingDate() + " has been saved!");
     }
 
 

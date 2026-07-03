@@ -20,7 +20,7 @@ public class Building {
     @GeneratedValue
     private UUID buildingID;
 
-    @Column(name = "building_name", nullable = false)
+    @Column(name = "building_name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "building_address", nullable = false)
