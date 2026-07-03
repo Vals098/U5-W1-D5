@@ -6,6 +6,7 @@ import valeriafarinosi.U5_W1_D5.entities.Booking;
 import valeriafarinosi.U5_W1_D5.entities.Building;
 import valeriafarinosi.U5_W1_D5.entities.User;
 import valeriafarinosi.U5_W1_D5.entities.Workstation;
+import valeriafarinosi.U5_W1_D5.exceptions.NotFoundException;
 import valeriafarinosi.U5_W1_D5.exceptions.TakenValueException;
 import valeriafarinosi.U5_W1_D5.repositories.BookingRepository;
 import valeriafarinosi.U5_W1_D5.repositories.BuildingRepository;
@@ -43,7 +44,12 @@ public class BookingService {
 
         log.info("The user " + newUser.getName() + " has been saved!");
     }
-    
+
+    //    FINDBYUSERNAME
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("No user with username: " + username + " has been found."));
+    }
 
     //    BUILDINGS METHODS
 //    SAVE
@@ -58,6 +64,12 @@ public class BookingService {
         log.info("The building " + newBuilding.getName() + " has been saved!");
     }
 
+    //    FINDBYNAME
+    public Building findBuildingByName(String name) {
+        return buildingRepository.findByName(name)
+                .orElseThrow(() -> new NotFoundException("No building with name: " + name + " has been found."));
+    }
+
     //    WORKSTATIONS METHODS
 //    SAVE
     public void save(Workstation newWorkstation) {
@@ -68,6 +80,12 @@ public class BookingService {
         workstationRepository.save(newWorkstation);
 
         log.info("The workstation " + newWorkstation.getWSCode() + " has been saved!");
+    }
+
+    //    FINDBYWSCODE
+    public Workstation findWorkstationByWSCode(String WSCode) {
+        return workstationRepository.findByWSCode(WSCode)
+                .orElseThrow(() -> new NotFoundException("No workspace with code: " + WSCode + " has been found."));
     }
 
     //    BOOKINGS METHODS
@@ -84,6 +102,8 @@ public class BookingService {
 
         log.info("Thank you " + newBooking.getUser().getName() + "! The booking for the workspace " + newBooking.getWorkstation().getWSCode() + " for the day " + newBooking.getBookingDate() + " has been saved!");
     }
+
+//    FINDBYWSTYPEANDCITY
 
 
 }
