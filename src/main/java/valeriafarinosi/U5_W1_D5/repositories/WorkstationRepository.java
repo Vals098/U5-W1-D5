@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface WorkstationRepository extends JpaRepository<Workstation, UUID> {
+    boolean existsByWSCode(String wsCode);
 }
