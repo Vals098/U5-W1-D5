@@ -122,5 +122,21 @@ public class MyRunner implements CommandLineRunner {
 //        bookingService.save(bookingG2); //SAVED
 //        bookingService.save(bookingGi1); //SAVED
 
+
+//        FIND WORKSTATION BY WS TYPE AND CITY
+//        TEST
+//        List<Workstation> testEmptyList = bookingService.findWorkstationByWSTypeAndCity(WS_TYPE.OPENSPACE, "Moria");
+//        log.info("List of requested workstations:" + testEmptyList); //VERIFIED NotFoundException: No workspaces of type OPENSPACE in Moria have been found.
+
+
+//        List<Workstation> list1 = bookingService.findWorkstationByWSTypeAndCity(WS_TYPE.OPENSPACE, "Hobbiton");
+//        log.info("List of requested workstations:" + list1); //VERIFIED
+
+//        List<Workstation> list2 = bookingService.findWorkstationByWSTypeAndCity(WS_TYPE.PRIVATE, "Moria");
+//        log.info("List of requested workstations:" + list2); //VERIFIED
+        
+//        List<Workstation> list3 = bookingService.findWorkstationByWSTypeAndCity(WS_TYPE.MEETING_ROOM, "Moria");
+//        log.info("List of requested workstations:" + list3); //VERIFIED
+
     }
 }

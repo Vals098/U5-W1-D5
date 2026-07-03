@@ -6,12 +6,15 @@ import valeriafarinosi.U5_W1_D5.entities.Booking;
 import valeriafarinosi.U5_W1_D5.entities.Building;
 import valeriafarinosi.U5_W1_D5.entities.User;
 import valeriafarinosi.U5_W1_D5.entities.Workstation;
+import valeriafarinosi.U5_W1_D5.enums.WS_TYPE;
 import valeriafarinosi.U5_W1_D5.exceptions.NotFoundException;
 import valeriafarinosi.U5_W1_D5.exceptions.TakenValueException;
 import valeriafarinosi.U5_W1_D5.repositories.BookingRepository;
 import valeriafarinosi.U5_W1_D5.repositories.BuildingRepository;
 import valeriafarinosi.U5_W1_D5.repositories.UserRepository;
 import valeriafarinosi.U5_W1_D5.repositories.WorkstationRepository;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -88,6 +91,19 @@ public class BookingService {
                 .orElseThrow(() -> new NotFoundException("No workspace with code: " + WSCode + " has been found."));
     }
 
+    //    FINDBYWSTYPEANDCITY
+    public List<Workstation> findWorkstationByWSTypeAndCity(WS_TYPE WSType, String city) {
+        List<Workstation> workstations = workstationRepository.findByWSTypeAndCity(WSType, city);
+
+        if (workstations.isEmpty()) {
+            throw new NotFoundException(
+                    "No workspaces of type " + WSType + " in " + city + " have been found.");
+        }
+
+        return workstations;
+    }
+
+
     //    BOOKINGS METHODS
 //    SAVE
     public void save(Booking newBooking) {
@@ -102,8 +118,6 @@ public class BookingService {
 
         log.info("Thank you " + newBooking.getUser().getName() + "! The booking for the workspace " + newBooking.getWorkstation().getWSCode() + " for the day " + newBooking.getBookingDate() + " has been saved!");
     }
-
-//    FINDBYWSTYPEANDCITY
 
 
 }
