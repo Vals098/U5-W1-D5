@@ -80,6 +80,7 @@ public class BookingService {
         if (this.workstationRepository.existsByWSCode(newWorkstation.getWSCode()))
             throw new TakenValueException("A workstation with code " + newWorkstation.getWSCode() + " already exists!");
 
+
         workstationRepository.save(newWorkstation);
 
         log.info("The workstation " + newWorkstation.getWSCode() + " has been saved!");
@@ -110,14 +111,23 @@ public class BookingService {
 //no other bookings with the same workspace and date
         if (this.bookingRepository.existsByBookingDateAndWorkstation(newBooking.getBookingDate(), newBooking.getWorkstation()))
             throw new TakenValueException("The workstation " + newBooking.getWorkstation().getWSCode() + " you requested is already booked for the date " + newBooking.getBookingDate());
-//a signle user can't book more than once on the same date. Verified
+//a single user can't book more than once on the same date. Verified
         if (this.bookingRepository.existsByBookingDateAndUser(newBooking.getBookingDate(), newBooking.getUser()))
             throw new TakenValueException("Dear user " + newBooking.getUser().getName() + " you already have a booking under your name for the day " + newBooking.getBookingDate());
+//nMaxOccupants and actual partecipants control missing
 
         bookingRepository.save(newBooking);
 
         log.info("Thank you " + newBooking.getUser().getName() + "! The booking for the workspace " + newBooking.getWorkstation().getWSCode() + " for the day " + newBooking.getBookingDate() + " has been saved!");
     }
 
+//    metodo di prima, sono costretto ad usare un metodo(findBy) prima di usare il mio metodo
+//    sempre, mentre se facciamo così:
+//    public void savePrenotazione(UUID userId, UUID workstationId, LocalDate data){}
+//    uso un solo metodo,
+//    utilizzabile in più punti del codice e non ha bisogno di una prenotazione già costruita
+//    più facilmente usabili e riutilizzabili possibie
+//    così creo la prenotazione dentro il metodo e non serve creare prima la prenotazione
+//    ragiona su chi dovrà usare il metodo
 
 }
